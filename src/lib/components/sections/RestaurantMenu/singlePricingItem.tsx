@@ -2,8 +2,8 @@ import React from 'react';
 import { twMerge } from 'tailwind-merge'
 
 const SinglePricingItem: React.FC<Props> = (props) => {
-    return <li className={twMerge('flex flex-row justify-between items-center p-2 bg-gray-200 dark:bg-gray-800', props.className)}>
-        <p className='flex flex-row items-center flex-grow-0 flex-shrink-0 pr-2'>
+    return <li className={twMerge('flex flex-row justify-between items-center p-2', props.className)}>
+        <h6 className='flex flex-row items-center flex-grow-0 flex-shrink-0 pr-2 text-gray-800 dark:text-gray-200 '>
             <span className='w-12 h-12 rounded-full bg-primary-color-900 mr-2 overflow-hidden'>
                 <img
                     loading='lazy'
@@ -12,11 +12,11 @@ const SinglePricingItem: React.FC<Props> = (props) => {
                     className='w-full h-full object-cover'
                 />
             </span>
-            {props.item_name}</p>
+            {props.item_name}</h6>
         <div className='flex-grow-1 w-full h-full relative'>
-            <div className={twMerge('w-full h-full top-0 left-0 border-b-2 border-b-primary-color-900 dark:border-b-primary-color-300 border-dashed absolute', props.classNameBorder)}> </div>
+            <div className={twMerge('w-full h-full top-0 left-0 border-b-2 border-b-gray-600 dark:border-b-gray-400 opacity-20 border-dashed absolute -translate-y-[30%]', props.classNameBorder)}> </div>
         </div>
-        <p className={twMerge('flex-grow-0 flex-shrink-0 pl-2 font-bold text-lg', props.classNamePrice)}>{Number.parseFloat(props.item_price).toFixed(2)}€</p>
+        <h6 className={twMerge('flex-grow-0 flex-shrink-0 pl-2 font-bold text-lg text-primary-color', props.classNamePrice)}>{Number.parseFloat(props.item_price).toFixed(2)}€</h6>
     </li>
 }
 
@@ -29,5 +29,6 @@ interface Props {
     featured_image?: string,
     className?: string,
     classNameBorder?: string,
-    classNamePrice?: string
+    classNamePrice?: string,
+    category: string
 }
