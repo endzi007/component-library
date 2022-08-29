@@ -1,4 +1,11 @@
 import ContactForm from "./contactForm";
-export * from "./RestaurantMenu";
+import RestaurantMenu from './restaurantMenu'
+import ThreeCardSection from "./threeCardsSection";
+import HeroSectionFull from "./heroSectionFull";
 
-export { ContactForm };
+export {
+    ContactForm,
+    RestaurantMenu,
+    ThreeCardSection,
+    HeroSectionFull
+}

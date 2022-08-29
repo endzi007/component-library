@@ -1,3 +1,2 @@
-import SinglePricingItem from "./singlePricingItem";
-export { SinglePricingItem };
+"use strict";
 //# sourceMappingURL=index.js.map

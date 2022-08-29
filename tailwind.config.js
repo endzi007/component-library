@@ -69,7 +69,8 @@ const config = {
         // Add your custom fonts and enjoy.
         'Oswald': ["Oswald", "Sans-serif"],
         'Macondo': ["Macondo", "Sans-serif"],
-        'Allura': ['Allura', "cursive"]
+        'Allura': ['Allura', "cursive"],
+        'Lora': ['Lora', 'serif']
       },
     }
   },

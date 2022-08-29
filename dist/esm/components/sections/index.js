@@ -1,3 +1,4 @@
 import ContactForm from "./contactForm";
-export { ContactForm };
+import RestaurantMenu from "./restaurantMenu";
+export { ContactForm, RestaurantMenu };
 //# sourceMappingURL=index.js.map

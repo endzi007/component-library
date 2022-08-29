@@ -1,6 +1,6 @@
 import React from 'react';
 declare const ContactForm: React.FC<Props>;
-interface Props {
+export interface Props {
     nameText: string;
     emailText: string;
     subjectText: string;

@@ -1,11 +1,12 @@
 import React from 'react';
-export interface MenuTabProps {
-    setCurrentTab: (tab: string) => void,
+export interface Props {
+    setCurrentTab: (tab: string) => void
     currentTab: string
+    tabs: string[]
 }
 
-const MenuTabs = (props: MenuTabProps) => {
-    const buttons: string[] = ["Wire Fox Terrier", "Welsh Sheepdog"];
+const Tabs = (props: Props) => {
+    const buttons: string[] = props.tabs;
 
     return <div className='flex w-full justify-center gap-3 p-5 font font-Oswald'>
         {
@@ -19,4 +20,4 @@ const MenuTabs = (props: MenuTabProps) => {
     </div>
 }
 
-export default MenuTabs;
+export default Tabs;
