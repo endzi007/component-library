@@ -14,11 +14,11 @@ export interface menuItems {
     item_price: string
     featured_image: string
     id: string | number
-    category: string
+    categories: string[]
 }
 
 const RestaurantMenu: React.FC<Props> = (props) => {
-    const [currentTab, setCurrentTab] = useState("Welsh Sheepdog");
+    const [currentTab, setCurrentTab] = useState("all");
 
     return <section className='py-20 w-full bg-gray-100 dark:bg-gray-800 flex flex-col items-center'>
         <h1 className='text-gray-800 dark:text-gray-200 tracking-widest capitalize mb-3'>{props.main_heading}</h1>
@@ -30,14 +30,29 @@ const RestaurantMenu: React.FC<Props> = (props) => {
             }} />
         </div>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-3 self-stretch'>
-            {props.menuItems!.map(menuItem => {
-                return menuItem.category === currentTab && <SinglePricingItem
+            {currentTab === props.tabs[0] && props.menuItems!.map((menuItem, i) => {
+                return <SinglePricingItem
+                    key={"menuitem_" + i}
                     item_name={menuItem.item_name}
                     item_price={menuItem.item_price}
                     className=''
                     featured_image={menuItem.featured_image}
-                    category={menuItem.category}
+                    categories={menuItem.categories}
                 />
+            })}
+            {currentTab !== props.tabs[0] && props.menuItems!.map((menuItem, i) => {
+                if (menuItem.categories.indexOf(currentTab) !== -1) {
+                    return <SinglePricingItem
+                        key={"menuitem_" + i}
+                        item_name={menuItem.item_name}
+                        item_price={menuItem.item_price}
+                        className=''
+                        featured_image={menuItem.featured_image}
+                        categories={menuItem.categories}
+                    />
+                } else {
+                    return null;
+                }
             })}
         </div>
     </section>

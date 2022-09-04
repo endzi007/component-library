@@ -1,6 +1,6 @@
 {
   "name": "@endzi007/component-library",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "A component library for reusing across projects.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -55,6 +55,7 @@
     ]
   },
   "dependencies": {
-    "tailwind-merge": "^1.6.0"
+    "tailwind-merge": "^1.6.0",
+    "zod": "^3.18.0"
   }
 }

@@ -1,12 +1,58 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { ContactForm, HeroSectionFull, RestaurantMenu, ThreeCardSection } from './lib/components/sections'
 import { menuItems } from './lib/components/sections/restaurantMenu';
 import { useFetchData } from "./lib/hooks/useFetchData";
+interface FetchData {
+  data: {
+    data: {
+      item_name: string,
+      item_price: string,
+      descriptiodddn: string,
+      item_slug: string,
+      featured_image: {
+        data: {
+          attributes: {
+            url: string
+          }
+        }
+      },
+      categories: {
+        data?: {
+          id: number | string,
+          attributes: {
+            category_name: string,
+            category_slug: string
+          }
+        }
+      }[]
+    }[]
+  }[],
+  meta: any
+}
 
 function App() {
   const [darkMode, setDarkMode] = useState<boolean>(false);
-  const { data, isDone } = useFetchData<menuItems[]>("https://63021964c6dda4f287b2c715.mockapi.io/pricingItems")
+  const { data, isDone, success } = useFetchData<FetchData | null>("http://localhost:1338/api/items?populate=deep,2&pagination[pageSize]=10");
+  const [menuItems, setMenuItems] = useState<menuItems[]>([])
+  useEffect(() => {
+    if (success) {
+      let arr: menuItems[] = [];
+      data.data.map(item => {
+        let obj: menuItems = {
+          item_name: item.attributes?.item_name,
+          item_price: item.attributes?.item_price,
+          featured_image: "http://localhost:1338" + item.attributes.featured_image.data?.attributes.url,
+          id: item.id,
+          categories: item.attributes.categories?.data.map(cat => {
+            return cat.attributes.category_name
+          })
+        };
+        arr.push(obj);
+      })
+      setMenuItems(arr);
+    }
+  }, [isDone])
   return (
     <div className={`${darkMode ? "dark" : "light"} App"`}>
       <button className='z-[10000] p-10 bg-primary-color text-white' onClick={() => {
@@ -17,9 +63,8 @@ function App() {
         <ThreeCardSection />
       </div>
 
-      {isDone &&
-        <RestaurantMenu descriptions='Cooking with love' main_heading='Our Menu' menuItems={data!} tabs={["Hrana", "Piće"]} />}
-
+      {success &&
+        <RestaurantMenu descriptions='Cooking with love' main_heading='Our Menu' menuItems={menuItems} tabs={["all", "food", "drink"]} />}
       <ContactForm nameText={'name'} emailText={'email'} subjectText={'subject'} messageText={'message'} buttonText={'Submit'} actionUrl={''} />
       <div className='bg-primary-color'></div>
     </div>

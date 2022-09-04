@@ -6,5 +6,6 @@ export interface Props {
     subjectText: string;
     messageText: string;
     buttonText: string;
+    actionUrl: string;
 }
 export default ContactForm;

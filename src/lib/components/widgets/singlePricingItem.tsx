@@ -30,5 +30,5 @@ interface Props {
     className?: string,
     classNameBorder?: string,
     classNamePrice?: string,
-    category: string
+    categories: string[]
 }
