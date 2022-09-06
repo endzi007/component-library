@@ -1,4 +1,5 @@
 export declare function useFetchData<Payload>(url: string): {
-    data: Payload | null | undefined;
+    data: any;
     isDone: boolean;
+    success: boolean;
 };

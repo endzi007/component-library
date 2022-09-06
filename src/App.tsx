@@ -33,39 +33,22 @@ interface FetchData {
 
 function App() {
   const [darkMode, setDarkMode] = useState<boolean>(false);
-  const { data, isDone, success } = useFetchData<FetchData | null>("http://localhost:1338/api/items?populate=deep,2&pagination[pageSize]=10");
-  const [menuItems, setMenuItems] = useState<menuItems[]>([])
-  useEffect(() => {
-    if (success) {
-      let arr: menuItems[] = [];
-      data.data.map(item => {
-        let obj: menuItems = {
-          item_name: item.attributes?.item_name,
-          item_price: item.attributes?.item_price,
-          featured_image: "http://localhost:1338" + item.attributes.featured_image.data?.attributes.url,
-          id: item.id,
-          categories: item.attributes.categories?.data.map(cat => {
-            return cat.attributes.category_name
-          })
-        };
-        arr.push(obj);
-      })
-      setMenuItems(arr);
-    }
-  }, [isDone])
+
   return (
     <div className={`${darkMode ? "dark" : "light"} App"`}>
       <button className='z-[10000] p-10 bg-primary-color text-white' onClick={() => {
         setDarkMode(!darkMode);
       }}>{darkMode ? "Light Mode" : "Dark Mode"}</button>
-      <HeroSectionFull bg_image='https://images.pexels.com/photos/616401/pexels-photo-616401.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' />
+      <HeroSectionFull
+        bg_image='https://images.pexels.com/photos/616401/pexels-photo-616401.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+        cta_button_1={'Order Now'}
+        cta_button_2={'Contact Us'}
+        main_heading="Food House"
+        description='Cooking With Love'
+      />
       <div className='mt-[200px] w-[80vw] m-auto'>
         <ThreeCardSection />
       </div>
-
-      {success &&
-        <RestaurantMenu descriptions='Cooking with love' main_heading='Our Menu' menuItems={menuItems} tabs={["all", "food", "drink"]} />}
-      <ContactForm nameText={'name'} emailText={'email'} subjectText={'subject'} messageText={'message'} buttonText={'Submit'} actionUrl={''} />
       <div className='bg-primary-color'></div>
     </div>
   );
